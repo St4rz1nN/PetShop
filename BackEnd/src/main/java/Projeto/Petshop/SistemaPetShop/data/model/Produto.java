@@ -1,4 +1,4 @@
-package Projeto.Petshop.SistemaPetShop.entity;
+package Projeto.Petshop.SistemaPetShop.data.model;
 
 import jakarta.persistence.*;
 //import javax.persistence.Entity;
@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 //import javax.persistence.Id;
 
 @Entity
+@Table(name="produtos")
 public class Produto {
 
     @Id

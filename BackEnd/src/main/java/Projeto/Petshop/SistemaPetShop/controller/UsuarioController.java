@@ -1,8 +1,8 @@
 package Projeto.Petshop.SistemaPetShop.controller;
 
 
-import Projeto.Petshop.SistemaPetShop.entity.Cliente;
-import Projeto.Petshop.SistemaPetShop.service.ClienteService;
+import Projeto.Petshop.SistemaPetShop.data.model.Usuario;
+import Projeto.Petshop.SistemaPetShop.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -10,32 +10,32 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
-public class ClienteController {
+public class UsuarioController {
 
     @Autowired
-    private ClienteService clienteService;
+    private UsuarioService clienteService;
 
     // Create
     @PostMapping
-    public Cliente criarCliente(@RequestBody Cliente cliente) {
+    public Usuario criarCliente(@RequestBody Usuario cliente) {
         return clienteService.criarCliente(cliente);
     }
 
     // Read (Listar todos)
     @GetMapping
-    public List<Cliente> listarClientes() {
+    public List<Usuario> listarClientes() {
         return clienteService.listarClientes();
     }
 
     // Read (Buscar por ID)
     @GetMapping("/{id}")
-    public Optional<Cliente> buscarClientePorId(@PathVariable Long id) {
+    public Optional<Usuario> buscarClientePorId(@PathVariable Long id) {
         return clienteService.buscarClientePorId(id);
     }
 
     // Update
     @PutMapping("/{id}")
-    public Cliente atualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteAtualizado) {
+    public Usuario atualizarCliente(@PathVariable Long id, @RequestBody Usuario clienteAtualizado) {
         return clienteService.atualizarCliente(id, clienteAtualizado);
     }
 

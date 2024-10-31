@@ -1,35 +1,35 @@
 package Projeto.Petshop.SistemaPetShop.service;
 
-import Projeto.Petshop.SistemaPetShop.entity.Cliente;
-import Projeto.Petshop.SistemaPetShop.repository.ClienteRepository;
+import Projeto.Petshop.SistemaPetShop.data.model.Usuario;
+import Projeto.Petshop.SistemaPetShop.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteService {
+public class UsuarioService {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UsuarioRepository clienteRepository;
 
     // Create
-    public Cliente criarCliente(Cliente cliente) {
+    public Usuario criarCliente(Usuario cliente) {
         return clienteRepository.save(cliente);
     }
 
     // Read (Listar todos)
-    public List<Cliente> listarClientes() {
+    public List<Usuario> listarClientes() {
         return clienteRepository.findAll();
     }
 
     // Read (Buscar por ID)
-    public Optional<Cliente> buscarClientePorId(Long id) {
+    public Optional<Usuario> buscarClientePorId(Long id) {
         return clienteRepository.findById(id);
     }
 
     // Update
-    public Cliente atualizarCliente(Long id, Cliente clienteAtualizado) {
+    public Usuario atualizarCliente(Long id, Usuario clienteAtualizado) {
         if (clienteRepository.existsById(id)) {
             clienteAtualizado.setId(id);
             return clienteRepository.save(clienteAtualizado);

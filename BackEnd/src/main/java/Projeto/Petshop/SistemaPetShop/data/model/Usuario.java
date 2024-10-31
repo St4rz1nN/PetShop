@@ -1,11 +1,11 @@
-package Projeto.Petshop.SistemaPetShop.entity;
+package Projeto.Petshop.SistemaPetShop.data.model;
 
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "clientes")
-public class Cliente {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,7 +14,7 @@ public class Cliente {
     private String email;
     private String telefone;
 
-    public Cliente() {}
+    public Usuario() {}
 
     // Exemplo de método que precisa de tipo de retorno
     public Long getId() {

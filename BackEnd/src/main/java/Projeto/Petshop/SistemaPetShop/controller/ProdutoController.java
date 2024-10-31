@@ -1,6 +1,6 @@
 package Projeto.Petshop.SistemaPetShop.controller;
 
-import Projeto.Petshop.SistemaPetShop.entity.Produto;
+import Projeto.Petshop.SistemaPetShop.data.model.Produto;
 import Projeto.Petshop.SistemaPetShop.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

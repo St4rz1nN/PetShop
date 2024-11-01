@@ -1,6 +1,7 @@
 package Projeto.Petshop.SistemaPetShop.data.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 //import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
@@ -8,6 +9,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="produtos")
+@Data
 public class Produto {
 
     @Id
@@ -18,46 +20,5 @@ public class Produto {
     private Double preco;
     private Integer quantidade;
     private String descricao;
-
-    // Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 }
 

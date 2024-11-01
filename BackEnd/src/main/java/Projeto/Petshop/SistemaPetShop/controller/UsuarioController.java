@@ -1,6 +1,7 @@
 package Projeto.Petshop.SistemaPetShop.controller;
 
 
+import Projeto.Petshop.SistemaPetShop.data.dto.UsuarioDto;
 import Projeto.Petshop.SistemaPetShop.data.model.Usuario;
 import Projeto.Petshop.SistemaPetShop.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +18,31 @@ public class UsuarioController {
 
     // Create
     @PostMapping
-    public Usuario criarCliente(@RequestBody Usuario cliente) {
-        return clienteService.criarCliente(cliente);
+    public UsuarioDto criarCliente(@RequestBody UsuarioDto usuario) {
+        return clienteService.criarUsuario(usuario);
     }
 
     // Read (Listar todos)
     @GetMapping
-    public List<Usuario> listarClientes() {
-        return clienteService.listarClientes();
+    public List<UsuarioDto> listarUsuarios() {
+        return clienteService.listarUsuarios();
     }
 
     // Read (Buscar por ID)
     @GetMapping("/{id}")
-    public Optional<Usuario> buscarClientePorId(@PathVariable Long id) {
-        return clienteService.buscarClientePorId(id);
+    public UsuarioDto buscarUsuarioPorId(@PathVariable Long id) {
+        return clienteService.buscarUsuarioPorId(id);
     }
 
     // Update
     @PutMapping("/{id}")
-    public Usuario atualizarCliente(@PathVariable Long id, @RequestBody Usuario clienteAtualizado) {
-        return clienteService.atualizarCliente(id, clienteAtualizado);
+    public UsuarioDto atualizarUsuario(@RequestBody UsuarioDto clienteAtualizado) {
+        return clienteService.atualizarUsuario(clienteAtualizado);
     }
 
     // Delete
     @DeleteMapping("/{id}")
-    public String deletarCliente(@PathVariable Long id) {
+    public String deletarUsuario(@PathVariable Long id) {
         if (clienteService.deletarCliente(id)) {
             return "Cliente deletado com sucesso";
         } else {

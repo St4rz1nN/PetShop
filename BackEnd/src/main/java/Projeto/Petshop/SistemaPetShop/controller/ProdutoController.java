@@ -1,5 +1,6 @@
 package Projeto.Petshop.SistemaPetShop.controller;
 
+import Projeto.Petshop.SistemaPetShop.data.dto.ProdutoDto;
 import Projeto.Petshop.SistemaPetShop.data.model.Produto;
 import Projeto.Petshop.SistemaPetShop.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,26 @@ public class ProdutoController {
 
     // Create
     @PostMapping
-    public Produto criarProduto(@RequestBody Produto produto) {
+    public ProdutoDto criarProduto(@RequestBody ProdutoDto produto) {
         return produtoService.criarProduto(produto);
     }
 
     // Read (Listar todos)
     @GetMapping
-    public List<Produto> listarProdutos() {
+    public List<ProdutoDto> listarProdutos() {
         return produtoService.listarProdutos();
     }
 
     // Read (Buscar por ID)
     @GetMapping("/{id}")
-    public Optional<Produto> buscarProdutoPorId(@PathVariable Long id) {
+    public ProdutoDto buscarProdutoPorId(@PathVariable Long id) {
         return produtoService.buscarProdutoPorId(id);
     }
 
     // Update
     @PutMapping("/{id}")
-    public Produto atualizarProduto(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
-        return produtoService.atualizarProduto(id, produtoAtualizado);
+    public ProdutoDto atualizarProduto(@RequestBody ProdutoDto produtoAtualizado) {
+        return produtoService.atualizarProduto(produtoAtualizado);
     }
 
     // Delete

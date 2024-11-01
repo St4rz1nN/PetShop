@@ -20,30 +20,36 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     // Create
-    public ProdutoDto criarProduto(ProdutoDto produto) {
-        produtoRepository.save(DozerConverter.parseObject(produto,Produto.class));
-        return produto;
+    public ProdutoDto criarProduto(ProdutoDto produtoDto) {
+        if (produtoDto == null) {
+            throw new IllegalArgumentException("Produto não pode ser nulo");
+        }
+        Produto produto = DozerConverter.parseObject(produtoDto, Produto.class);
+        produto = produtoRepository.save(produto);
+        return DozerConverter.parseObject(produto, ProdutoDto.class);
     }
 
     // Read (Listar todos)
     public List<ProdutoDto> listarProdutos() {
-        return DozerConverter.parseListObjects(produtoRepository.findAll(),ProdutoDto.class);
+        List<Produto> produtos = produtoRepository.findAll();
+        return DozerConverter.parseListObjects(produtos, ProdutoDto.class);
     }
 
     // Read (Buscar por ID)
     public ProdutoDto buscarProdutoPorId(Long id) {
-        if (produtoRepository.existsById(id)){
-            return DozerConverter.parseObject(produtoRepository.findById(id),ProdutoDto.class);
-        }
-        return null;
+        Optional<Produto> produtoOpt = produtoRepository.findById(id);
+        return produtoOpt.map(produto -> DozerConverter.parseObject(produto, ProdutoDto.class)).orElse(null);
     }
 
     // Update
     public ProdutoDto atualizarProduto(ProdutoDto produtoAtualizado) {
+        if (produtoAtualizado == null || produtoAtualizado.getId() == null) {
+            throw new IllegalArgumentException("Produto ou ID não podem ser nulos");
+        }
         if (produtoRepository.existsById(produtoAtualizado.getId())) {
-            var produto = DozerConverter.parseObject(produtoAtualizado, Produto.class);
-            produtoRepository.save(produto);
-            return produtoAtualizado;
+            Produto produto = DozerConverter.parseObject(produtoAtualizado, Produto.class);
+            produto = produtoRepository.save(produto);
+            return DozerConverter.parseObject(produto, ProdutoDto.class);
         }
         return null;
     }
@@ -57,5 +63,4 @@ public class ProdutoService {
         return false;
     }
 }
-
 

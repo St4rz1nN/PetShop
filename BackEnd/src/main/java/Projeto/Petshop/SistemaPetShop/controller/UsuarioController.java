@@ -43,7 +43,7 @@ public class UsuarioController {
     // Delete
     @DeleteMapping("/{id}")
     public String deletarUsuario(@PathVariable Long id) {
-        if (clienteService.deletarCliente(id)) {
+        if (clienteService.deletarUsuario(id)) {
             return "Cliente deletado com sucesso";
         } else {
             return "Cliente não encontrado";

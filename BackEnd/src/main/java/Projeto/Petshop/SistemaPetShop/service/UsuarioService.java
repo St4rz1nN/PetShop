@@ -16,31 +16,42 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     // Create
-    public UsuarioDto criarUsuario(UsuarioDto usuario) {
-        usuarioRepository.save(DozerConverter.parseObject(usuario, Usuario.class));
-        return usuario;
+    public UsuarioDto criarUsuario(UsuarioDto usuarioDto) {
+        if (usuarioDto == null) {
+            throw new IllegalArgumentException("Usuário não pode ser nulo");
+        }
+        Usuario usuario = DozerConverter.parseObject(usuarioDto, Usuario.class);
+        usuario = usuarioRepository.save(usuario);
+        return DozerConverter.parseObject(usuario, UsuarioDto.class);
     }
 
     // Read (Listar todos)
     public List<UsuarioDto> listarUsuarios() {
-        return DozerConverter.parseListObjects(usuarioRepository.findAll(), UsuarioDto.class);
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return DozerConverter.parseListObjects(usuarios, UsuarioDto.class);
     }
 
     // Read (Buscar por ID)
     public UsuarioDto buscarUsuarioPorId(Long id) {
-        return DozerConverter.parseObject(usuarioRepository.findById(id), UsuarioDto.class);
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+        return usuarioOpt.map(usuario -> DozerConverter.parseObject(usuario, UsuarioDto.class)).orElse(null);
     }
 
-    public UsuarioDto atualizarUsuario(UsuarioDto usuario) {
-        if (usuarioRepository.existsById(usuario.getId())) {
-            usuarioRepository.save(DozerConverter.parseObject(usuario, Usuario.class));
-            return usuario;
+    // Update
+    public UsuarioDto atualizarUsuario(UsuarioDto usuarioDto) {
+        if (usuarioDto == null || usuarioDto.getId() == null) {
+            throw new IllegalArgumentException("Usuário ou ID não podem ser nulos");
+        }
+        if (usuarioRepository.existsById(usuarioDto.getId())) {
+            Usuario usuario = DozerConverter.parseObject(usuarioDto, Usuario.class);
+            usuario = usuarioRepository.save(usuario);
+            return DozerConverter.parseObject(usuario, UsuarioDto.class);
         }
         return null;
     }
 
     // Delete
-    public boolean deletarCliente(Long id) {
+    public boolean deletarUsuario(Long id) {
         if (usuarioRepository.existsById(id)) {
             usuarioRepository.deleteById(id);
             return true;
